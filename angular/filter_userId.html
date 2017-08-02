@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/angular/angular.min.js"></script>
+</head>
+<body ng-app="box">
+<div ng-controller="first">
+    <div ng-repeat="item in arr | filterAge track by $index">
+    {{item.user}}
+    {{item.age}}
+    </div><hr>
+    <div ng-repeat="item in arr | filterName track by $index">
+        {{(nameArr|filter:item.user)[0].userName}}
+        {{(nameArr|filter:item.user: 5 }}
+        {{item.age}}
+    </div><hr>
+    <div ng-repeat="item in arr | filter :{age:16} track by $index">
+    {{item.user}}
+    {{item.age}}
+    </div>
+</div>
+<script>
+    angular.module("box",[],function ($provide,$filterProvider) {
+       $filterProvider.register("filterAge",function () {
+           return function (obj) {
+               var newObj = [];
+               angular.forEach(obj, function (o) {
+                   if (o.age > 20) {
+                       newObj.push(o);
+                   }
+               });
+               return newObj;
+           }
+       });
+        $provide.service("Data",function () {
+//            return [
+//
+//            ]
+            this.date=[
+                {
+                    user:1,
+                    age:23
+                },
+                {
+                    user:2,
+                    age:16
+                },
+                {
+                    user:3,
+                    age:36
+                },
+                {
+                    user:4,
+                    age:16
+                }
+            ]
+        })
+    })
+        .filter("filterName",function () {
+            return function (obj) {
+                var arr=[];
+                angular.forEach(obj,function (o) {
+                    if(o.user==1){
+                        arr.push(o);
+                    }
+                });
+                return  arr;
+        }
+        })
+        .controller("first",function ($scope,Data) {
+            $scope.nameArr=[{user:1,userName:"ekin"},{user:2,userName:"mike"},{user:3,userName:"jack"},{user:4,userName:"even"},{user:5,userName:"even"}];
+            $scope.arr=Data.date;
+            console.log($scope.arr);
+        })
+</script>
+</body>
+</html>

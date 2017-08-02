@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../default.css">
+    <script src="../bower_components/angular/angular.min.js"></script>
+
+
+</head>
+<body ng-app="box">
+<div ng-controller="first">
+    <p>{{name1}}</p>
+    <p>{{name2}}</p>
+    <p>{{name3}}</p>
+</div>
+
+<script>
+    angular.module("box", [])
+        .factory("factoryService", function () {
+            this.data = function () {
+                alert("factory")
+            };
+            this.name = {age: 33};
+            console.log(this, "factory");
+            return {
+                message: "factory",
+                data: function () {
+                    alert("factory")
+                }
+            };
+
+//                return function(){
+//                    this.data=function () {
+//                        alert("factory")
+//                    };
+//                    this.message="factory"
+//                }
+
+        })
+        .service("serviceService", function () {
+//            this.data={
+//                message:"service"
+//            };
+//            this.name={age:33};
+//            return {
+//                message:"service"
+//            }
+            console.log(this, "service");
+            this.data = function () {
+                alert("service");
+            };
+            this.name = {
+                message: "ekins"
+            };
+            this.$get = function () {
+                return {
+                    message: "provider"
+                }
+            };
+            return  function () {
+                this.message=function () {
+                    alert("service");
+                }
+
+            };
+
+//            return {
+//                message:"service"
+//            }
+        })
+        .provider("providerService", function () {
+            console.log(this,"provider");
+            this.message="provider";
+            this.$get = function () {
+                return {
+                    message: "provider"
+                }
+            };
+//            要写在$get 方法里才能在controller里调用
+//            return {
+//                    message: "provider"
+//                }
+        })
+        .controller("first", function ($scope, serviceService, factoryService,providerService) {
+            $scope.name1=providerService.message;
+//            serviceService.data();
+
+//            factoryService();
+//            data();
+//            $scope.name2 = serviceService.name.message;
+            $scope.name2 = serviceService.message;
+            $scope.name3=factoryService.message;
+            factoryService.data();
+            console.log(serviceService, "serviceService");
+            console.log(factoryService, "factoryService");
+            console.log(providerService, "providerService");
+        })
+</script>
+</body>
+</html>

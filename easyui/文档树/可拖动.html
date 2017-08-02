@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可拖动</title>
+    <link rel="stylesheet" type="text/css" href="../../bower_components/easyui/jquery-easyui-1.5/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../../bower_components/easyui/jquery-easyui-1.5/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="../../bower_components/easyui/jquery-easyui-1.5/themes/demo.css">
+    <script src="../../bower_components/easyui/jquery-easyui-1.5/jquery.min.js"></script>
+    <script src="../../bower_components/easyui/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+    <style>
+
+        #menu{
+            position: absolute;
+            background:#0E2D5F;
+            width: 150px;
+        }
+        #menu li{
+            height: 30px;
+            line-height: 30px;
+            padding-left: 10px;
+        }
+        #menu li:hover{
+            background: #9cc8f7;
+        }
+        /*.block{display:block}*/
+        .none{display:none}
+    </style>
+</head>
+<body>
+<ul id="tree" class="easyui-tree"></ul>
+<ul id="menu" class="none">
+    <li onclick="menu.rename()">编辑</li>
+    <li onclick="menu.del()">删去</li>
+    <li onclick="menu.append()">新建</li>
+</ul>
+<script>
+    var $tree=$("#tree"),
+    $menu=$("#menu");
+    $tree.tree({
+        url:"./tree.json",
+        method:"get",
+        animate:true,
+        dnd:true,
+        onClick:function (node) {
+            alert(1);
+        },
+        onContextMenu:function (e,node) {
+            e.preventDefault();
+            $(this).tree("select",node.target);
+            $menu.show();
+            $menu.css({"top":e.clientY,"left":e.clientX+30});
+            var parent=$tree.tree("getChildren",node.target);
+            console.log(parent);
+
+        },
+        onDrop:function (target, source, poin) {
+
+            console.log(target,"target");
+            console.log(source,"source");
+            console.log(poin,"poin");
+            console.log($(target).siblings("ul")[0],"poin");
+            $(this).tree("disableDnd");
+
+            if (!$(target).siblings("ul")[0]){
+                alert(123);
+                $(this).tree("disableDnd");
+            }
+        }
+    });
+     var menu={
+         node:function () {
+             return $tree.tree('getSelected').target;
+         },
+        rename:function () {
+            $tree.tree("beginEdit",this.node());
+        },
+         del:function () {
+             $tree.tree("remove",this.node());
+         },
+         append:function () {
+             var child=$(this.node()).siblings("ul")[0];
+             var parent=$(this.node()).parent().parent().siblings("div")[0];
+             $tree.tree("append",{
+                 parent:child?this.node():parent,
+                 data: [{text: '新报表'}]
+             });
+         }
+     };
+     $(document).click(function () {
+         alert(1);
+         $menu.hide();
+     })
+</script>
+</body>
+</html>

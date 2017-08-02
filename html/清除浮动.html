@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul {
+            position: relative;
+            border: 1px solid red;
+            /*overflow: auto;*/
+        }
+
+        ul:after {
+            content: ".";
+            display: block;
+            overflow:hidden;
+            height: 0;
+            clear: both;
+
+        }
+
+        li {
+            float: left;
+            margin-left: 10px;
+            width: 100px;
+            height: 233px;
+            background: red;
+        }
+
+        li:hover div {
+            display: block;
+        }
+
+        div {
+            position: absolute;
+            left: 0;
+            top: 200px;
+            width: 350px;
+            height: 350px;
+            background: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li>
+        <div></div>
+    </li>
+    <li>
+        <div></div>
+    </li>
+    <li>
+        <div></div>
+    </li>
+    <li>
+        <div></div>
+    </li>
+    <!--<li style="clear:both;"></li>-->
+</ul>
+<!--<div style="clear:both;"></div>-->
+</body>
+</html>

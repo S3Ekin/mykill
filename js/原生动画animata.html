@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script type="text/javascript">
+    var block=document.getElementById("div");
+    block.addEventListener("click", function(){
+        block.addEventListener("click", function() {
+            var self = this,
+                startTime = Date.now(),
+                distance = 1000,
+                duration = 2000;
+            requestAnimationFrame(function step() {
+                var p = Math.min(1.0, (Date.now() - startTime) / duration);
+                self.style.transform = "translateX(" + (distance * p * p) + "px)";
+                if(p < 1.0) requestAnimationFrame(step);
+            });
+        });
+    });
+</script>
+</body>
+</html>

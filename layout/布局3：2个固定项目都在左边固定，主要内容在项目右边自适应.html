@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>左侧固定，主要内容自适应</title>
+    <link rel="stylesheet" href="../default.css">
+    <style>
+        div.layout {
+            padding-left:420px;
+        }
+
+        div.layout > div {
+
+            height: 400px;
+        }
+
+        div.layout:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        div.layout-right {
+            float: left;
+            margin-left:-420px;
+            width:200px;
+            background:red;
+        }
+        div.layout-left {
+            float: left;
+            margin-left:-210px;
+            width: 200px;
+            background: green;
+        }
+        div.center{
+            float: right;
+            width: 100%;
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+<div class="layout">
+    <div class="layout-left"></div>
+    <div class="layout-right"></div>
+    <div class="center"></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta http-equiv="content-type" content="text/html;charset='UTF-8'" >
+    <!--<meta http-equiv="refresh" content="5">-->
+    <meta name="keywords" content="小说;大侠">
+    <meta mam="description" content="好玩的大侠，他咋在拉屎。">
+    <meta name="author" content="Ekins">
+    <title>Title</title>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <style>
+        /*default css */
+        body,p,ul,h1{
+            margin:0;
+            padding:0;
+        }
+        ul,ol,dl{
+            list-style:none
+        }
+        a{
+            text-decoration: none;
+        }
+        img{
+            border:0;
+        }
+        /*your css */
+        .div{
+            position: relative;
+            width: 400px;
+            height: 1900px;
+            background: red;
+            /*padding-top: 11px;*/
+        }
+        p{
+            /*margin:40px 0 0 80px;*/
+            width: 50px;
+            height: 550px;
+            /*padding-top:10px;*/
+            /*border:1px solid red;*/
+            background: #555;
+        }
+ .piaofu{
+     position: absolute;
+     top:0;
+     width:50px;
+     height:200px;
+     background:black;
+     opacity: 0.5;
+
+ }
+    </style>
+
+</head>
+<body>
+<div class="div">
+<p>我在这里</p>
+</div>
+<div class="piaofu"></div>
+<script>
+var div = document.querySelector(".div");
+var p= document.querySelector("p");
+//var tance= div.clintY;
+//console.log(tance);
+console.log(screen.width,"屏幕的宽");
+console.log(p.offsetHeight,"高");
+console.log(p.offsetTop,"距离父级");
+console.log(p.offsetLeft,"距离左边");
+console.log(p.clientHeight,"可见内容的高度，不包括border 和 滚动条");
+
+console.log($(window).height(),"window");
+
+/*悬浮条始终在窗口的中间*/
+window.onscroll=function () {
+    goTop();
+};
+function goTop(){
+    console.log($(".piaofu").height());
+    $(".piaofu").stop().animate({"top":($(window).height()+$(window).scrollTop()-($(window).height()+$(".piaofu").height())/2)<550 ? 550 :$(window).height()+$(window).scrollTop()-($(window).height()+$(".piaofu").height())/2},2000);
+
+}
+
+
+
+</script>
+</body>
+</html>

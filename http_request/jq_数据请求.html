@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+<div >
+    <button class="load">load</button>
+    <button class="getJSON">getJSON</button>
+    <button class="getScript">getScript</button>
+    <button class="get">get</button>
+    <button class="post">post</button>
+</div>
+    <ul class="data">
+        <li></li>
+    </ul>
+<script>
+var $btn=$("button");
+var $ul=$(".data");
+function btnClick(index,url,callback) {
+     $btn[0].addEventListener("click",function () {
+         callback(url);
+     })
+}
+btnClick(0,"load.html",function (url) {
+    $ul.load(url,function (data) {
+    });
+    $.ajax({
+        url:"http://h6.duchengjiu.top/shop/api_userinfo.php",
+        data:{
+            status:"info",
+            username:"123abc"
+        },
+        headers:{
+            token:'072943c9d9f27a291b700f41b40c931d',
+            Access-Control-Allow-Headers →Origin,X-Requested-With,Content-Type,Accept,token
+    "Access-Control-Allow-Origin" :"*"
+    Access-Control-Request-Methods →GET,POST,PUT,DELETE,OPTIONS
+    Connection →keep-alive
+    Content-Encoding →gzip
+    Content-Length →144
+    Content-Type →text/html
+        },
+        success:function (data) {
+            console.log(data);
+        }
+    })
+
+})
+
+</script>
+</body>
+</html>

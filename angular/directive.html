@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>自定义指令</title>
+    <link rel="stylesheet" href="../default.css">
+    <script src="../bower_components/angular/angular.min.js"></script>
+</head>
+<style>
+    .div {
+        width: 100px;
+        height: 300px;
+        border: 1px solid black;
+    }
+
+    .red {
+        background: red;
+    }
+</style>
+<body ng-app="app">
+<div>
+    <div class="div" enter>你在干嘛？</div>
+    <p>{{name}}</p>
+    <ekin></ekin>
+    <div ng-controller="first">
+        <p enters="del()">我是说</p>
+    </div>
+</div>
+<script>
+    angular.module("app", [])
+        .directive("enter", function () {
+            return function (scope, element) {
+                console.log(element);
+                var count = 1;
+                element.bind("click", function () {
+//                    element.after("<p>在后面<p/>");
+                    count++;
+                    if (count % 2 === 0) {
+                        element.addClass("red");
+                    } else {
+                        element.removeClass("red")
+                    }
+
+                })
+
+            }
+        })
+        .directive("ekin", function () {
+            return {
+                restrict: 'E',
+                template: '<div><form action=""><table><tr><td>名字：</td><td><input type="text" ng-model="name"></td></tr></table></form></div>',
+                link: function (scope, element) {
+                    scope.$watch('name', function (p1, p2, p3) {
+                        console.log(p1, p2);
+                        if (p1 == "ekin") {
+                            element.css({
+                                color: "red"
+                            });
+                        } else {
+                            element.css({
+                                color: "black"
+                            });
+                        }
+                    })
+                }
+            }
+        })
+        .controller("first", function ($scope) {
+            $scope.add = function () {
+                alert("add");
+            };
+            $scope.del = function () {
+                alert("del");
+            };
+        })
+        .directive("enters", function () {
+            return {
+                link: function (scope, element,attrs) {
+                    element.bind('mouseenter',function(){
+//                        scope.add();
+//                        scope.$apply(function () {
+//                            scope.add();
+//                        })
+                        scope.$apply(attrs.enters);
+//                        scope.$apply(scope.add());
+                    });
+                    
+                    
+                }
+            }
+        })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>以及</p>
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+  /*
+  首先的引人jq
+  在fn上扩展,通过$()选择元素在调用
+  */
+  $.fn.f1=function () {
+      console.log("f1");
+  };
+  /*
+   通过extened继承，选择元素再调用
+   */
+  $.fn.extend({
+      f2:function () {
+          console.log("f2");
+      },
+      f3:function () {
+          console.log("f3")
+      }
+  });
+  /*
+   直接在$上调用
+   */
+  $.f4=function () {
+      console.log("f4");
+  };
+  /*
+   直接在$上调用
+   */
+    $.extend({
+      f5:function () {
+          console.log("f5");
+      },
+        f6:function () {
+          console.log("f6")
+
+        }
+    });
+    $("p").f1();
+    $("p").f2();
+    $("p").f3();
+    $.f4();
+    $.f5();
+
+</script>
+</body>
+</html>

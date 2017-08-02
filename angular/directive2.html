@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>自定义指令</title>
+    <link rel="stylesheet" href="../default.css">
+    <script src="../bower_components/angular/angular.min.js"></script>
+</head>
+<style>
+    .div {
+        width: 100px;
+        height: 300px;
+        border: 1px solid black;
+    }
+    .red {
+        background: red;
+    }
+</style>
+<body ng-app="app">
+<div>
+<food apple>我在这里</food><hr>
+<food orange >我在这里</food>
+</div>
+<script>
+    angular.module("app", [])
+//        建立公用的模版，在其他的指令控件里使用。
+        .directive("food",function () {
+            return {
+                restrict:"E",
+scope:{},
+                template:"<p>我是模版</p><p><input type='text' ></p>",
+                controller:function ($scope) {
+
+                    $scope.foods=[];
+//                    $scope.addApple=function () {
+//                        $scope.foods.push('apple');
+//                    };
+                    this.addApple=function () {
+                        $scope.foods.push('apple');
+                    };
+                    this.addOrange=function () {
+                        $scope.foods.push('orange');
+                    };
+                    this.addBanana=function () {
+                        $scope.foods.push('banana');
+                    };
+                },
+                link:function (scope,element,attrs) {
+                    element.find("input").bind("mouseenter",function () {
+//                        每次开始清除掉以前的数据
+//                        scope.foods=[];
+//                      scope.$apply(scope.addApple());
+                        console.log(scope.foods);
+                    })
+
+                }
+            }
+
+        })
+        .directive("apple",function () {
+            return {
+                require:'food',
+                link:function (scope,element,attrs,foodCtrl){
+                   foodCtrl.addApple();
+                }
+            }
+
+
+        })
+        .directive("orange",function () {
+            return {
+                require:'food',
+                link:function (scope,element,attrs,foodCtrl){
+                   foodCtrl.addOrange();
+                }
+            }
+
+
+        })
+
+</script>
+</body>
+</html>`

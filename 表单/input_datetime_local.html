@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <title>菜鸟教程(runoob.com)</title> 
+    <style>
+        div{
+            width:550px;
+            height:50px;
+            border:1px solid red;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<!--<form  id="formData">-->
+<label for="bdaytime">生日 (日期和时间):</label>
+    <div><input type="datetime-local" name="bdaytime"><br></div>
+
+<input type="month" name="month">
+<input type="submit">
+<!--</form>-->
+<script>
+    var vaules=document.getElementById("formData");
+console.log(vaules);
+console.log(vaules.bdaytime);
+
+    vaules.bdaytime.addEventListener("change",function(){
+        console.log(vaules.bdaytime.value);
+
+    });
+</script>
+</body>
+</html>

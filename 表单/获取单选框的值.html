@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单选框</title>
+</head>
+<body>
+<div >
+    <input type="radio" name="bday" value="苹果"  onclick="submit1()"/>苹果
+    <input type="radio" name="bday" value="香蕉"  onclick="submit1()"/>香蕉
+    <input type="radio" name="bday"  value="西瓜"  onclick="submit1()"/>西瓜
+</div>
+<script >
+    var dr=document.getElementsByName("bday");
+    function submit1(){
+        for(i=0;i<dr.length;i++){
+            if(dr[i].checked){
+                alert(dr[i].value);
+                break;
+            }
+        }
+
+    }
+    //reverse
+    submit1.reverseSelect=function(){
+        for(i=0;i<dr.length;i++){
+            if(dr[i].checked){
+                dr[i].checked=false;
+            }else{
+                dr[i].checked=true;
+            }
+        }
+    };
+
+</script>
+</body>
+</html>

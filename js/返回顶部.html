@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #top_div {
+        position: fixed;
+        bottom: 80px;
+        right: 0;
+        display: none;
+    }
+        li{
+            width: 100px;
+            height: 200px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+<!--<a name="top">顶部</a>-->
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+    <div id="top_div">
+        <a href="">返回顶部</a>
+    </div>
+    <!--<br/> <br/>-->
+<script type="text/javascript">
+    window.onscroll = function () {
+        var t = document.documentElement.scrollTop || document.body.scrollTop;
+        var top_div = document.getElementById("top_div");
+        if (t >= 300) {
+            top_div.style.display = "inline";
+        } else {
+            top_div.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>

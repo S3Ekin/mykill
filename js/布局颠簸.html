@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var h1 = element1.clientHeight;// 写 (布局作废)
+     element1.style.height = (h1 * 2) + 'px';// 读 (触发布局)
+     var h2 = element2.clientHeight;// 写 (布局作废)
+     element2.style.height = (h2 * 2) + 'px';// 读 (触发布局)
+     var h3 = element3.clientHeight;// 写 (布局作废)
+     element3.style.height = (h3 * 2) + 'px';
+    // DOM被写时，布局就作废了，需要在某个时间点重排。但浏览器很懒，它想等到当前操作(或说帧)结束前再来重排。不过，如果我们在当前操作(或说帧)结束前从DOM中读取几何数值，那么我们就强制浏览器提前重排布局，这就是所谓的「强制同步布局」(forced synchonous layout)，它会要了性能的命。在现代的桌面浏览器上，布局颠簸的副作用可能并不明显；但放到低端移动设备上，问题就很严重了。快速解决办法在一个理想世界里，我们只要简单地重新排列代码执行顺序，就可以批量读DOM、批量写DOM。这意味着，文档只需一次重排。复制代码代码如下:// 读
+     var h1 = element1.clientHeight;
+     var h2 = element2.clientHeight;
+     var h3 = element3.clientHeight;
+     // 写 (布局作废)
+     element1.style.height = (h1 * 2) + 'px';
+     element2.style.height = (h2 * 2) + 'px';
+     element3.style.height = (h3 * 2) + 'px';
+    // 文档在帧末重排现实世界又如何？现实中可就没那么简单。大型程序中，代码散播各处，个个都存在这类危险的DOM。我们没法轻松(显然也不应该)把我们漂亮的、解藕的代码揉合一块，就只是为了控制住执行顺序。那么为了优化性能，我们怎样把读和写做批量处理？来认识requestAnimationFramewindow.requestAnimationFrame安排一个函数在下一帧执行，类似于setTimout(fn, 0)。这非常有用，因为我们可以用它来排定所有的DOM写操作在下一帧一同执行，DOM读操作就按现在的顺序同步执行。复制代码代码如下:// 读
+     var h1 = element1.clientHeight;
+    // 写
+     requestAnimationFrame(function() {  element1.style.height = (h1 * 2) + 'px';});
+    // 读
+     var h2 = element2.clientHeight;// 写
+     requestAnimationFrame(function() {  element2.style.height = (h2 * 2) + 'px';});
+</script>
+
+</body>
+</html>

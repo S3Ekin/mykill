@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//  对象数组
+  var trackObj1={
+    "trackId":31,
+    "direcLine":"line31"
+  };
+  var currentTrack=[];
+  currentTrack.push(trackObj1);
+  var trackObj2={
+    "trackId":30,
+    "direcLine":"line30"
+  };
+  currentTrack.push(trackObj2);
+
+//  判断currentTrack这个数组中是否存在trackId=31的对象
+
+  /*按照属性值，查找对象*/
+  function findElem(arrayToSearch,attr,val){
+    for (var i=0;i<arrayToSearch.length;i++){
+      if(arrayToSearch[i][attr]==val){
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  var index=findElem(currentTrack,"trackId","31");
+</script>
+</body>
+</html>

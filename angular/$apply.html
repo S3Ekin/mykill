@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/angular/angular.min.js"></script>
+</head>
+<body ng-app="box">
+<div ng-controller="first">
+    <input type="text" ng-model="name" >
+    <p>名字：{{name}}</p>
+    <p>{{count}}</p>
+</div>
+<div ng-controller="second">
+    <p>second:{{name}}</p>
+    <p>time:{{date}}</p>
+</div>
+<div ng-controller="three">
+    <p>three:{{count}}</p>
+</div>
+<script>
+    angular.module("box",[])
+        .controller("three",function ($scope) {
+            console.log($scope,"three");
+            $scope.count=1;
+        })
+        .controller("first",function ($scope) {
+            console.log($scope,"first");
+            $scope.count=1;
+            $scope.name=1;
+            $scope.$watch("name",function (news, old, p3) {
+                console.log(news,old,p3);
+                $scope.count++;
+            });
+//            console.log($scope.$$nextSibling.name);
+        })
+        .controller("second",function ($scope) {
+            console.log($scope,"second");
+            $scope.name="ekins";
+            $scope.date= new Date();
+
+                setInterval(function () {
+                    $scope.$apply(function ($scope) {
+                    $scope.date=new Date();
+                    });
+                },1000);
+
+
+        })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/angular/angular.min.js"></script>
+</head>
+<body ng-app="box">
+<div ng-controller="first">
+    <div ng-repeat="item in arr | filterAge track by $index">
+    {{item.name}}
+    {{item.age}}
+    </div><hr>
+    <div ng-repeat="item in arr | filterName track by $index">
+        {{item.name}}
+        {{item.age}}
+    </div><hr>
+    <div ng-repeat="item in arr | filter :{age:1} track by $index">
+    {{item.name}}
+    {{item.age}}
+    </div>
+</div>
+<script>
+    angular.module("box",[],function ($provide,$filterProvider) {
+       $filterProvider.register("filterAge",function () {
+           return function (obj) {
+               var newObj = [];
+               angular.forEach(obj, function (o) {
+                   if (o.age > 20) {
+                       newObj.push(o);
+                   }
+               });
+               return newObj;
+           }
+       });
+        $provide.service("Data",function () {
+//            return [
+//
+//            ]
+            this.date=[
+                {
+                    name:"ekins",
+                    age:23
+                },
+                {
+                    name:"jack",
+                    age:16
+                },
+                {
+                    name:"mike",
+                    age:36
+                },
+                {
+                    name:"even",
+                    age:16
+                }
+            ]
+        })
+    })
+        .filter("filterName",function () {
+            return function (obj) {
+                var arr=[];
+                angular.forEach(obj,function (o) {
+                    if(o.name=="ekins"){
+                        arr.push(o);
+                    }
+                });
+                return  arr;
+            }
+        })
+        .controller("first",function ($scope,Data) {
+            $scope.arr=Data.date;
+        })
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this与对象</title>
+</head>
+<body>
+<script>
+    this.a=1;
+    fun2();
+//    fun1(); 垃圾回收机制
+    function fun2() {
+
+        function fun() {
+            this.a=4;
+            alert("23432432");
+        }
+        fun();
+        var fun;
+        console.log(fun);
+
+        console.log(a,345);
+    }
+
+
+
+    console.log(a);
+</script>
+</body>
+</html>

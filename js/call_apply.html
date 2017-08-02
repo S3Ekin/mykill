@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>call与原型</title>
+</head>
+<body>
+<script>
+    /*所以，可以看出 call 和 apply 是为了动态改变 this 而出现的，当一个 object 没有某个方法（本栗子中banana没有say方法），但是其他的有（本栗子中apple有say方法），我们可以借助call或apply用其它对象的方法来操作。*/
+    function fun1() {
+        var messages="ekins";
+        this.messages="ekins";
+        var alerts=function () {
+            console.log(234);
+        }
+    }
+    function fun2() {
+        console.log(this.messages);
+        this.messages="hu";
+
+    }
+    fun1();
+    fun2.call(fun1());
+    console.log(fun2);
+    var fun=new fun1();
+    console.log(fun);
+    var arr=[1,34,5435,2];
+    console.log(arr.slice());
+    function log(){
+        console.log.apply(console, arguments);
+    }
+    log(1); //1
+    log(1,2); //1 2
+</script>
+</body>
+</html>

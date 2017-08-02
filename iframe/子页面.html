@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>我是子页面</p>
+<script>
+    window.onload=function () {
+        var father=window.parent;
+        console.log(father);
+        var ele=father.document.getElementById("opt");
+        console.log(ele);
+        console.log(location.search);
+    }
+</script>
+</body>
+</html>

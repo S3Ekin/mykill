@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.log(a);/*变量声明提前*/
+    var a=2;
+    (function () {
+        console.log(a);
+        var a=b=3;
+        console.log(a);/*局部作用域*/
+        console.log(b);
+
+    })();
+    console.log(a);/*全局变量*/
+    console.log(b);/*未定义*/
+
+</script>
+</body>
+</html>

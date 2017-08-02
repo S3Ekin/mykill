@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        .title {
+            background: black;
+            color: white;
+        }
+        p{
+            color: red;
+        }
+    </style>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body ng-app='myApp' ng-controller='myCtrl'>
+<!--<div my-directive data="{{data}}"></div>-->
+<div my-directive data="{{data}}"></div>
+<script type="text/javascript">
+    angular.module('myApp',[])
+        .controller('myCtrl',function($scope){
+            $scope.data=[{
+                title:'click me my name is one',
+                content:'I arm one'
+            },{
+                title:'click me my name is two',
+                content:'I arm two'
+            },{
+                title:'click me my name is three',
+                content:'I arm three'
+            }]
+
+        })
+        .directive('myDirective',function(){
+            return {
+
+                restrict:'ACE',
+                replace:true,
+                scope:{
+                    data:'@'
+                },
+                template:"<div ng-repeat='list in arr'><div class='title'  ng-click='showChange(1)'>{{list.title}}{{$index}}</div><p>{{ekins}}</p><div ng-show='listActive==$index' ng-bind='list.content'></div></div>",
+                controller:function($scope){
+                    $scope.ekins="hu";
+                    $scope.showChange=function(index){
+                        console.log(index);
+                        $scope.listActive=!index;
+                    };
+                },
+                link:function(scope,element,attrs){
+
+                    scope.listActive=0;
+                    scope.arr=eval(scope.data);
+
+
+                }
+
+            }
+        })
+</script>
+</body>
+</html>

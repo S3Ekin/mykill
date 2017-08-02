@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"IE与Fix</title>
+    <style>
+        li{
+            width: 100px;
+            height: 200px;
+            background:red;
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<script>
+    window.onscroll=function () {
+        var IE=document.body.scrollTop ;
+        var  Fix=document.documentElement.scrollTop;
+        var IE2=window.scrollY ;
+        var  Fix2=window.scrollY;
+        console.log(IE,Fix,1);
+        console.log(IE2,Fix2,2);
+    };
+
+</script>
+</body>
+</html>

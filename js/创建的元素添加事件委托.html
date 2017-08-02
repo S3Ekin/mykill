@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .red{
+            margin-top: 10px;
+            width: 200px;
+            height: 200px;
+            background:red;
+        }
+    </style>
+</head>
+<body>
+<ul id="oul"  onclick="remove()"></ul>
+<script>
+    var oul=document.getElementById("oul");
+    for(var i=0;i<5;i++){
+        oul.innerHTML += '<li class="red"></li>';
+//       var oli=document.createElement("li");
+//       oli.className="red";
+//       oul.appendChild(oli);
+        oli.addEventListener("click", function(event){
+            alert(1);
+            oul.removeChild(event.target);
+            // document.body.removeChild(this);
+        });
+    }
+//    var oli=oul.getElementsByTagName("li");
+    console.log(oli);
+    oli.addEventListener("click", function(event){
+        alert(1);
+        oul.removeChild(event.target);
+        // document.body.removeChild(this);
+    });
+    function remove() {
+        alert(1);
+    }
+</script>
+</body>
+
+</html>

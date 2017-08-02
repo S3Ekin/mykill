@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jq自定义事件</title>
+<body>
+<div>我是花生</div>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script>
+    $("div").bind("sekin",function (e) {
+        alert("div");
+    });
+    /*触发事件*/
+    $("div").trigger("sekin");
+</script>
+</body>
+</html>

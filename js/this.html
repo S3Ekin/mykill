@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this</title>
+</head>
+<body>
+<script>
+    var fun=function () {
+        function son() {
+          alert("son");
+        }
+        var name="ekins";
+        this.message="ekin";
+        this.alerts=function () {
+            alert("haoshuo");
+        };
+        console.log(this,"this");
+    };
+    fun();
+    fun.prototype={
+        data:function () {
+//            原型里的this和构造函数里的this 是一样的
+            console.log(this.message);
+        },
+        message:"name"
+    };
+    alerts();
+    console.log(fun,"fun");
+    var news=new fun();
+    news.data();
+    console.log(news,"news");
+    function Add(){
+ this.naem='hu';
+    }
+    var add = new Add();
+    add.__proto__=fun.prototype;
+    console.log(add,"add");
+    add.data.call();
+//   fun.call(add);
+</script>
+</body>
+</html>

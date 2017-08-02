@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="wsscat">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript" src="../../bower_components/angular/angular.min.js"></script>
+
+<body ng-controller="bodyCtrl">
+<article ng-controller="indexCtrl">
+    {{name}}
+    <button ng-click="click()">Ok</button>
+    <section ng-controller="indexChildCtrl">
+        <input ng-model="name" ng-change="changName()" />
+        {{name}}
+    </section>
+</article>
+
+<article ng-controller="indexBrotherCtrl">
+    {{name}}
+    </section>
+</article>
+</body>
+<script>
+    var app = angular.module('wsscat', []);
+    app.controller('bodyCtrl', function($scope) {
+        $scope.$on('to-parent', function(event, data) {
+            console.log('I am the parent, I got it', data);
+        });
+    });
+    app.controller('indexCtrl', function($scope) {
+        $scope.name = "wsscat";
+        $scope.click = function() {
+            //向下广播事件
+            $scope.$broadcast('to-child', {message:"haha",show:$scope.show()});
+            //向上广播事件
+            $scope.$emit('to-parent', 'hehe');
+        };
+        //子控制器indexChildCtrl改变名字后，向上发送to-parent-name事件委托告诉indexCtrl，$scope.name值已经发生改变，并一起作出改变
+        $scope.$on('to-parent-name', function(event, data) {
+            alert(1);
+           console.log();
+            data();
+            console.log('I am the parent to-parent-name, I got it', data);
+//            $scope.name = data;
+        });
+    });
+
+    app.controller('indexChildCtrl', function($scope,$rootScope) {
+        $scope.name="child";
+        $scope.resh="childsafdsfds";
+        $scope.$on('to-child', function(event, data) {
+            console.log('I am the child, I got it', data);
+        });
+
+        $scope.show=function () {
+            alert("我是孩子！");
+        };
+
+        $scope.changName = function() {
+            $rootScope.name=$scope.name;
+            console.log($scope.name,"indexChild");
+//            $rootScope.$emit('all', $scope.resh);
+            $scope.$emit('to-parent-name', $scope.show);
+            $rootScope.$broadcast('all', $scope.name);
+        }
+    });
+
+    app.controller('indexBrotherCtrl', function($scope,$rootScope) {
+//        $rootScope.name="rootsrt";
+        console.log($rootScope.name);
+//        $scope.name=$rootScope.name ;
+//        $rootScope.name="";
+
+        $rootScope.$on('all', function(event, data) {
+            console.log(data);
+            $scope.name = data;
+        });
+    });
+
+    app.service("hiEventService", function($rootScope) {
+        this.broadcast = function() {
+            $rootScope.$broadcast("hi")
+        }
+        this.listen = function(callback) {
+            $rootScope.$on("hi", callback)
+        }
+    })
+</script>
+</html>>

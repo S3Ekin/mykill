@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+    <style>
+        div{
+            vertical-align: ;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function hmac (key, message) {
+        if (length(key) > blocksize) {
+            key = hash(key) // keys longer than blocksize are shortened
+        }
+        if (length(key) < blocksize) {
+            // keys shorter than blocksize are zero-padded (where ∥ is concatenation)
+            key = key ∥ [0x00 * (blocksize - length(key))] // Where * is repetition.
+        }
+
+        o_key_pad = [0x5c * blocksize] ⊕ key // Where blocksize is that of the underlying hash function
+        i_key_pad = [0x36 * blocksize] ⊕ key // Where ⊕ is exclusive or (XOR)
+
+        return hash(o_key_pad ∥ hash(i_key_pad ∥ message)) // Where ∥ is concatenation
+    }
+</script>
+</body>
+</html>
