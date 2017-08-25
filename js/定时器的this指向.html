@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        button{
+            background: darkred;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: #3ae;
+        }
+    </style>
+</head>
+<body>
+    <div id="oDiv">
+        <button id="btn">change</button>
+    </div>
+</body>
+<script>
+    var btn=document.getElementById("btn");
+    var oDiv=document.getElementById("oDiv");
+    btn.onclick=function () {
+        setTimeout(function () {
+            oDiv.style.background="red";
+        },2000);
+       alerts();
+    };
+    function alerts() {
+        console.log(this);
+    }
+</script>
+</html>
