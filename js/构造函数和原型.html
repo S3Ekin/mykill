@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function A(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    A.prototype.sayHello=function () {
+        alert(this.name);
+    };
+    var a=new A("sekin",23);
+    console.log(a);
+</script>
+</body>
+</html>

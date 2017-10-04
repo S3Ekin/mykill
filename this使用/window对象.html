@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function showThis () {
+        console.log(this)
+    }
+    function showStrictThis () {
+        'use strict';
+        console.log(this)
+    }
+    showThis(); // window
+    showStrictThis(); // undefined
+    showThis();
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 142px;
+            height: 410px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<script>
+    /*面向对象*/
+    function Honglvdeng(r) {
+        /*初始化*/
+        this.init(r);
+        /*绑定点击事件*/
+        this.bindEven();
+    }
+    Honglvdeng.prototype.init=function (r) {
+        this.dom=document.createElement("div");
+        this.color=r;
+        this.dom.style.background="url(../img/"+r+".png)";
+        document.body.appendChild(this.dom);
+    };
+    Honglvdeng.prototype.bindEven=function () {
+        this.dom.onclick=function () {
+            switch (this.color){
+                case "r":
+                    this.color="g";
+                    break;
+                case "g":
+                    this.color="y";
+                    break;
+                default:
+                    this.color="r";
+                    break;
+            }
+            this.dom.style.background="url(../img/"+this.color+".png)";
+        }.bind(this);
+    };
+    var dengColor=["r","g","y"];
+    for (var i = 0; i < 10; i++) {
+        var index=Math.floor(Math.random()*1000%3);
+       new Honglvdeng(dengColor[index]);
+    }
+</script>
+</body>
+</html>
